@@ -33,13 +33,55 @@ int RecursiveMultiplication(int a, int b)
 	//You can use addition(+), subtraction(-) and bitShifting(<< or >>), but you
 	//should minimize the number of those operations.
 
-	return 0;
+	assert(a >= 0 && b >= 0);
+
+	if (a < b)
+	{
+		return RecursiveMultiplication(b, a);
+		// Done to make sure the function repeats itself correctly
+	}
+
+	else if (b != 0)
+	{
+		return (a + RecursiveMultiplication(a, b - 1));
+	}
+
+	else
+	{
+		return 0;
+	}
 }
 
 int NonRecursiveFibonacci(int n)
 {
 	//TODO: Convert the recursive fibonacci that we did in class
 	//to a non recursive method, using a bottom-up approach.
+
+	assert(n >= 0);
+
+	if (n < 2)
+	{
+		return n;
+	}
+
+	else
+	{
+		int fibLeft = 0;
+		int fibRight = 1;
+		int fibSumValue = 0;
+
+		for (int i = 1; i < n; ++i)
+		{
+			fibSumValue = fibLeft + fibRight; // Calculates the Fib number
+
+			// Then the next code moves the values to calculate the next number
+			fibLeft = fibRight;
+			fibRight = fibSumValue;
+		}
+
+		return fibSumValue;
+	}
+
 	return 0;
 }
 
@@ -50,6 +92,34 @@ int PrintFibonacciLessThan15(int n)
 	//PrintFibonacciLessThan15(7) -> "0 1 1 2 3 5 8 13". You just need to print what is between "".
 	//Don't forget that is less than 15, so use assert if the method is being used outside the
 	//boundaries of the function.
+
+	assert(n >= 0);
+
+	if (n < 1)
+	{
+		std::cout << n;
+		return n;
+	}
+
+	else
+	{
+		int fibLeft = 0;
+		int fibRight = 1;
+		int fibSumValue = 0;
+
+		std::cout << fibLeft << " ";
+
+		while (fibSumValue < 15)
+		{
+			std::cout << fibRight << " ";
+
+			fibSumValue = fibLeft + fibRight;
+			fibLeft = fibRight;
+			fibRight = fibSumValue;
+		}
+		
+	}
+
 	return 0;
 }
 
@@ -61,6 +131,18 @@ int printRecursiveFactorialLessThan50(int n)
 	//As an example:
 	//printRecursiveFactorialLessThan50(10) -> "10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1"
 	//The function just prints what is between "".
+
+	assert(n >= 0 && n < 50);
+
+	if (n > 1)
+	{
+		std::cout << n << " * ";
+		return n * printRecursiveFactorialLessThan50(n - 1);
+	}
+
+	std::cout << "1";
+	return 1;
+
 	return 0;
 }
 
