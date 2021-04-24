@@ -18,7 +18,7 @@ int foo_1(int n)
 	}
 	return current;
 }
-//Answer: 
+//Answer: O(log n)
 
 
 //TODO:
@@ -33,7 +33,7 @@ int pow_a(int m, int n)
 	}
 	return ret;
 }
-//Answer for pow_a: 
+//Answer for pow_a: O(n)
 
 int pow_b(int m, int n) {
 	int ret = 1;
@@ -47,7 +47,7 @@ int pow_b(int m, int n) {
 	}
 	return ret;
 }
-//Answer for pow_b: 
+//Answer for pow_b: O(1)
 
 //TODO:
 //Question 3:
@@ -81,7 +81,7 @@ int removeDuplicates(char arr[], int n)
 	}
 	return len;
 }
-//Answer:
+//Answer: O(n^2)
 
 //TODO:
 //Question 4: 
@@ -90,7 +90,22 @@ int removeDuplicates(char arr[], int n)
 //For example: Pow(3, 3) means that is 3 ^ 3 and the returned array will be: [1, 3, 9, 27]
 int* Pow(int n, int e)
 {
-	return new int();
+	int size = e + 1;
+	int ret = 1;
+	int* powerArray = new int[size];
+
+	for (int i = 0; i < size; ++i)
+	{
+		if (i == 0)
+			powerArray[i] = ret;
+		else
+		{
+			ret *= n;
+			powerArray[i] = ret;
+		}
+	}
+
+	return powerArray;
 }
 
 //TODO:
@@ -99,7 +114,23 @@ int* Pow(int n, int e)
 // [2, 3, 4, 1, 6, 20, 0]
 void DisplayArray(int* arr, int n)
 {
+	int i = 0;
 
+	std::cout << "[";
+	
+	while ( i < n)
+	{
+		std::cout << arr[i];
+		
+		if (i + 1 != n)
+		{
+			std::cout << ", ";
+		}
+
+		++i;
+	}
+
+	std::cout << "]";
 }
 
 //TODO: This question is optional. It's bonus if you don't search or copy anything from the internet.
