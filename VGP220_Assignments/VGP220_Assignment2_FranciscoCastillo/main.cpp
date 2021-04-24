@@ -152,6 +152,13 @@ void DisplayArray(int* arr, int n)
 //5)If an egg breaks when dropped, then it would break if dropped from a higher floor.
 
 
+// A way to find the algorithm is to set a specfic value for going between floors (ex. unsigned int floorSkip = 5) and skip that number of floors each time the loop repeats
+// That way we have a value that can check where the first egg breaks. If the egg does not break on the first step of the loop (DropEgg) then all the 5 floors below will be a safe spot
+// If the egg does break then we can automatically break from the loop because assumption 5 becomes true and any floor above it would break the egg
+// Then we can enter a second loop and use those 5 floors previous to where the egg broke to check which floor is our limit (floor = 70, then we will use floors 65 to 70)
+// We iterarte between those floors and test dropping the second egg until it breaks again. Once the second egg breaks we find our florr limit.
+
+
 int main(int argc, char* argv[])
 {
 	//Test:
