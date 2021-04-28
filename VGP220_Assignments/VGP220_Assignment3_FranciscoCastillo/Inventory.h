@@ -6,31 +6,103 @@
 class Inventory
 {
 public:
-	Inventory() 
+	Inventory()
+		:mMaxSlots(5),
+		mSlotsOccupied(0)
 	{
 		//TODO: Implement a default constructor for the Inventory class where the max number of slots
 		// is 5 and all the slots are free (They are not occupied).
+		mInventory = new Item[5];
 	}
 	Inventory(uint32_t capacity)
+		:mMaxSlots(capacity),
+		mSlotsOccupied(0)
 	{
 		//TODO: Implement a non default constructor for the Inventory class where 
 		//all the slots are free (They are not occupied).
+		mInventory = new Item[capacity];
 	}
 	Inventory(const Inventory& other)
 	{
 		//TODO: Implement a copy constructor for this class. Avoid shallow copy.
+		mMaxSlots = other.mMaxSlots;
+		mSlotsOccupied = other.mSlotsOccupied;
+
+		delete[] mInventory;
+		mInventory = nullptr;
+
+		mInventory = new Item[other.mMaxSlots];
+
+		for (auto i = 0; i < other.mSlotsOccupied; ++i)
+		{
+			mInventory[i] = other.mInventory[i];
+		}
 	}
 	Inventory(Inventory&& other)
 	{
 		//TODO: Implement a move constructor for this class. Reset to a default state the other inventory.
+		mMaxSlots = other.mMaxSlots;
+		other.mMaxSlots = 0;
+
+		mSlotsOccupied = other.mSlotsOccupied;
+		other.mSlotsOccupied = 0;
+
+		delete[] mInventory;
+		mInventory = nullptr;
+
+		mInventory = other.mInventory;
+		other.mInventory = nullptr;
 	}
 	~Inventory() 
 	{
 		//TODO: Implement a destructor for this class.
+		delete[] mInventory;
+		mInventory = nullptr;
+
 	}
 
 	//TODO: Implement a copy assignment operator
+	Inventory& operator=(const Inventory& rhs)
+	{
+		if (this != &rhs)
+		{
+			mMaxSlots = rhs.mMaxSlots;
+			mSlotsOccupied = rhs.mSlotsOccupied;
+
+			delete[] mInventory;
+			mInventory = nullptr;
+
+			mInventory = new Item[rhs.mMaxSlots];
+
+			for (auto i = 0; i < rhs.mSlotsOccupied; ++i)
+			{
+				mInventory[i] = rhs.mInventory[i];
+			}
+		}
+
+		return *this;
+	}
 	//TODO: Implement a move assignment operator
+	Inventory& operator=(const Inventory&& rhs)
+	{
+		if (this != &rhs)
+		{
+			mMaxSlots = rhs.mMaxSlots;
+			mSlotsOccupied = rhs.mSlotsOccupied;
+
+			delete[] mInventory;
+			mInventory = nullptr;
+
+			mInventory = new Item[rhs.mMaxSlots];
+
+			for (auto i = 0; i < rhs.mSlotsOccupied; ++i)
+			{
+				mInventory[i] = rhs.mInventory[i];
+			}
+		}
+
+		return *this;
+	}
 
 	void AddItem(Item newItem) 
 	{
