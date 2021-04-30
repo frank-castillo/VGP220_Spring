@@ -21,12 +21,16 @@ int main(int argc, char* argv[])
 	inventory_2.AddItem(hps);
 	inventory_2.AddItem(hps);
 	inventory_2.AddItem(hps);
+	inventory_2.AddItem(curse);
+
+	//inventory_2.PrintInventory(); // Testing Inventory elements are correctly being added to the array
 
 	//Testing remove small quantity 
 	inventory_2.RemoveItem("Healing Potion", 3);
 	//Testing remove big quantity 
 	inventory_2.RemoveItem("Healing Potion", 60);
-
+	
+	//inventory_2.PrintInventory(); // Testing Inventory elements are correctly being erased from the array
 
 	//Testing Copy Constructor
 	Inventory inventory_3(inventory_2);
@@ -35,9 +39,9 @@ int main(int argc, char* argv[])
 	
 	Inventory inventory_5;
 	//TODO: Testing copy assignment operator
-	//inventory_5 = inventory_2;
+	inventory_5 = inventory_2;
 	//TODO: Testing move assignment operator
-	//inventory_5 = std::move(inventory_4);
+	inventory_5 = std::move(inventory_4);
 
 	inventory_2.AddItem(poisonPotion);
 	inventory_2.AddItem(sword);
@@ -48,4 +52,9 @@ int main(int argc, char* argv[])
 	inventory_2.AddItem(rope);
 
 	//TODO: Other tests that you want to make
+	inventory_2.UseItem("Poison Potion");
+	inventory_2.UseItem("Rope");
+	inventory_2.UseItem("Expansion");
+	
+	return 0;
 }
