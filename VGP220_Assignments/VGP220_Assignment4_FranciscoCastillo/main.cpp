@@ -1,13 +1,13 @@
 #include <iostream>
 #include "LinkedList.h"
-#include "Queue.h"
+//#include "Queue.h"
 
 
 //TESTS
 int main(int argc, char* argv[])
 {
 	LinkedList<int> myList;
-	Queue<int> myQueue;
+	//Queue<int> myQueue;
 
 	//Linked List Test
 	myList.Insert(1);
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	myList.ClearList();
 	myList.DisplayList();
 
-
+	/*
 	//Queue test
 	myQueue.Enqueue(1);
 	myQueue.Enqueue(2);
@@ -43,6 +43,8 @@ int main(int argc, char* argv[])
 		std::cout << "Element " << removedElement << " removed.\n";
 	}
 	myQueue.DisplayQueue();
+
+	*/
 
 	//TODO_OPTIONAL: Run more tests for your data structures.
 }
