@@ -42,6 +42,8 @@ public:
 			return false;
 		}
 
+		front = (front + 1) % capacity;
+		count--;
 
 	}
 	
