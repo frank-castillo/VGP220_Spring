@@ -42,9 +42,20 @@ public:
 			return false;
 		}
 
-		front = (front + 1) % capacity;
-		count--;
+		for (auto i = 0; i < mCurrentSize; ++i)
+		{
+			if (mData[i] == output)
+			{
+				for (auto j = i; j < mCurrentSize; ++j)
+				{
+					mData[j] = mData[j + 1];
+				}
 
+				return true;
+			}
+		}
+
+		return false;
 	}
 	
 	//Returns true if queue is empty, false otherwise
