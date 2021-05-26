@@ -34,7 +34,8 @@ int main(int argc, char* argv[])
 	std::cout << "Top 5 students and grades:\n";
 	for (int i = 0; i < 5; ++i) 
 	{
-		std::cout << i+1 << ") " << first5->data << " " << first5->priority << "\n";
+		std::cout << i+1 << ") " << first5[i].data << " " << first5[i].priority << "\n";
+		// The previous code version that was written first5->data and first5->priority kept printing the same Name and priority but once I changed it to what's above the list of name was printed with no issues
 	}
 	//EXPECTED:
 	//Top 5 students and grades:
@@ -50,5 +51,9 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < 6; ++i)
 	{
 		priorityQueue.Dequeue();
+		//auto testEmpty = priorityQueue.Dequeue();
+		//std::cout << testEmpty.data << " " << testEmpty.priority << "\n";
 	}
+
+	return 0;
 }

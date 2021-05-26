@@ -15,17 +15,29 @@ public:
 		T data;
 	};
 
-	PriorityQueue(Data emptyValue) 
+	PriorityQueue(Data emptyValue)
+		:mCapacity(10)
+		,mSize(0)
 	{
 		//TODO_1: Implement the constructor of this priority queue
 		//Look to do this, look at the member variables that you have.
 		//You can default initiliaze your capacity with 10 elements.
+
+		mDataArray = new Data[mCapacity];
+
+		mEmptyValue.priority = emptyValue.priority;
+		mEmptyValue.data = emptyValue.data;
+
 	}
 
 	~PriorityQueue() 
 	{
 		//TODO_2: Implement the destructor of this priority queue
 		//Remember that whatever you "new" you have to "delete"
+
+		delete[] mDataArray;
+		mDataArray = nullptr;
+
 	}
 
 	void Enqueue(Data data) 
@@ -38,6 +50,21 @@ public:
 		//Heaps Insertion: Place the element at the end of the array,
 		//In a loop, check yourself against you parent.priority. 
 		//If yours is bigger, swap;
+
+		if (mSize != mCapacity)
+		{
+			mDataArray[mSize] = data;
+			int i = mSize;
+			++mSize;
+
+			while (i != 0 && mDataArray[GetParent(i)].priority < mDataArray[i].priority)
+			{
+				swap(&mDataArray[i], &mDataArray[GetParent(i)]);
+				i = GetParent(i);
+			}
+			return;
+		}
+		std::cout << "Max Heap is full!" << std::endl;
 	}
 
 	Data Dequeue() 
@@ -50,6 +77,21 @@ public:
 		//Heaps RemoveMax: Make the first element to receive the last
 		//element from your array. After this, Heapfy.
 		//If the queue is empty, return mEmptyValue
+
+		if (mSize != 0)
+		{
+			--mSize;
+			if (mSize == 0)
+			{
+				return mDataArray[0];
+			}
+
+			auto root = mDataArray[0];
+			mDataArray[0] = mDataArray[mSize];
+			Heapfy(0);
+			return root;
+		}
+
 		return mEmptyValue;
 	}
 
@@ -88,6 +130,27 @@ private:
 		//Remember:
 		//Heapfy: In a loop, checks which one is bigger in priority between left and right. and select.
 		//Then compares with it's priority. If parent priority is smaller, Swap.
+
+		int leftIndex = GetLeft(index);
+		int rightIndex = GetRight(index);
+		int maxValue = index;
+
+		if (leftIndex < mSize - 1 && mDataArray[leftIndex].priority > mDataArray[maxValue].priority)
+		{
+			maxValue = leftIndex;
+		}
+
+		if (rightIndex < mSize - 1 && mDataArray[rightIndex].priority > mDataArray[maxValue].priority)
+		{
+			maxValue = rightIndex;
+		}
+
+		if (maxValue != index)
+		{
+			swap(&mDataArray[index], &mDataArray[maxValue]);
+			Heapfy(maxValue);
+		}
+
 	}
 
 	Data* mDataArray;
