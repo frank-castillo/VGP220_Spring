@@ -33,6 +33,11 @@ public:
 		++mCurrentSize;
 	}
 	
+	//ERROR -5: There is a problem with your dequeue. You are not changing the size of your queue.
+	//The output is the element that you will return to the user. It's an OUTPUT. So you should follow the FIFO insertion and removal.
+	//So, if the queue is empty, return false and don't fill the output, but you you have something you remove one element giving this 
+	//element to the output and return true.
+
 	//Removes an element from the queue and returns this element in the output parameter
 	//Also it returns true if the object was removed and false if the Queue is empty
 	bool Daqueue(T& output)

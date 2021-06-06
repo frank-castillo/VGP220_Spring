@@ -2,6 +2,9 @@
 #include <string>
 #include <list>
 
+//Grade: 100/100. You should test your dictionary because you have some small errors, but it showed that you understand
+//how to deal with the data structure! Congrats!
+
 //Solve collision with chaining
 //This Dictionary does not allows similar keys.
 
